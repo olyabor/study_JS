@@ -25,12 +25,6 @@ let amount2 = +prompt('Во сколько это обойдется?');
 console.log(addExpenses.toLowerCase().split(', '));
 
 let getExpensesMonth = function (amount1, amount2) {
-  if (!amount1) {
-    amount1 = 0;
-  }
-  if (!amount2) {
-    amount2 = 0;
-  }
    return amount1 + amount2;
 };
 
