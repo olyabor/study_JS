@@ -79,3 +79,8 @@ appData.getBudget();
 console.log('Расходы за месяц: ' + appData.expensesMonth);
 console.log(appData.getTargetMonth());
 console.log(appData.getStatusIncome());
+
+console.log('Наша программа включает в себя данные: ');
+for (let key in appData) {
+  console.log(key+ ': '+appData[key]);
+}
