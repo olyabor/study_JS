@@ -1,4 +1,32 @@
 'use strict';
+const startButton = document.getElementById('start'),
+  [incomeAdd, expensesAdd] = document.getElementsByTagName('button'),
+  depositCheck = document.getElementById('deposit-check'),
+  additionalIncomeItem = document.querySelectorAll('.additional_income-item'),
+  budgetMonthValue = document.getElementsByClassName('budget_month-value')[0],
+  budgetDayValue = document.getElementsByClassName('budget_day-value')[0],
+  expensesMonthValue = document.getElementsByClassName(
+    'expenses_month-value'
+  )[0],
+  additionalIncomeValue = document.getElementsByClassName(
+    'additional_income-value'
+  )[0],
+  additionalExpensesValue = document.getElementsByClassName(
+    'additional_expenses-value'
+  )[0],
+  incomePeriodValue = document.getElementsByClassName('income_period-value')[0],
+  targetMonthValue = document.getElementsByClassName('target_month-value')[0],
+  salaryAmount = document.querySelector('.salary-amount'),
+  incomeTitle = document.querySelector('.income-title'),
+  incomeAmount = document.querySelector('.income-amount'),
+  expensesTitle = document.querySelector('.expenses-title'),
+  expensesAmount = document.querySelector('.expenses-amount'),
+  additionalExpensesItem = document.querySelector('.additional_expenses-item'),
+  depositAmount = document.querySelector('.deposit-amount'),
+  depositPercent = document.querySelector('.deposit-percent'),
+  targetAmount = document.querySelector('.target-amount'),
+  periodSelect = document.querySelector('.period-select');
+  
 let isNumber = function(n) {
   return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -54,17 +82,22 @@ let appData = {
     for (let i = 0; i < 2; i++) {
       let key = prompt('Введите обязательную статью расходов', 'Садик Государственный');
       // Проверить, является ли наименование статьи обязательных расходов непустой строкой
-      while (!isString(key)) {
-        key = prompt('Введите обязательную статью расходов', 'Садик Государственный');
-      }
-      let  amount = prompt('Во сколько это обойдется?', 2500);
-      while (!isNumber(amount)) {
-        amount = prompt('Во сколько это обойдется?', 2500);
-      }
-      if (key in appData.expenses) {
-        key += ' ' + i;
-      }
-      appData.expenses[key] = +amount;
+      if (key !== null) {
+        while (!isString(key)) {
+          key = prompt(
+            'Введите обязательную статью расходов',
+            'Садик Государственный'
+          );
+        }
+        let amount = prompt('Во сколько это обойдется?', 2500);
+        while (!isNumber(amount)) {
+          amount = prompt('Во сколько это обойдется?', 2500);
+        }
+        if (key in appData.expenses) {
+          key += ' ' + i;
+        }
+        appData.expenses[key] = +amount;
+      } else {break;}
     }
     return appData.expenses;
   },
@@ -126,3 +159,5 @@ console.log('Наша программа включает в себя данны
 for (let key in appData) {
   console.log(key + ': ' + appData[key]);
 }
+
+
