@@ -49,23 +49,24 @@ let appData = {
   budgetMonth: 0,
   expensesMonth: 0,
   start: function () {
+    start.disabled = salaryAmount.value === '';
     let input = document.querySelectorAll('input[type=text]');
     this.budget = +salaryAmount.value;
+    if (!start.disabled) {
+      appData.getExpenses();
+      appData.getExpensesMonth();
+      appData.getIncome();
+      appData.getAddExpenses();
+      appData.getAddIncome();
+      appData.getBudget();
 
-    appData.getExpenses();
-    appData.getExpensesMonth();
-    appData.getIncome();
-    appData.getAddExpenses();
-    appData.getAddIncome();
-    appData.getBudget();
-
-    appData.showResult();
-    start.style.display = 'none';
-    cancel.style.display = 'block';
-    start.disabled = salaryAmount.value === '';
-    input.forEach(function (item) {
-      item.disabled = true;
-    });
+      appData.showResult();
+      start.style.display = 'none';
+      cancel.style.display = 'block';
+      input.forEach(function (item) {
+        item.disabled = true;
+      });
+    }
   },
   reset: function () {
     let input = document.querySelectorAll('input[type=text]');
@@ -105,6 +106,7 @@ let appData = {
     cancel.style.display = 'none';
     start.style.display = 'block';
     start.disabled = false;
+    periodSelect.removeEventListener('input', this.start);
   },
   showResult: function () {
     budgetMonthValue.value = this.budgetMonth;
@@ -225,8 +227,11 @@ periodSelect.addEventListener('input', function () {
   periodAmount.innerHTML = periodSelect.value;
 });
 
-start.addEventListener('click', appData.start.bind(appData));
-cancel.addEventListener('click', appData.reset.bind(appData));
+salaryAmount.addEventListener('input', function () {
+  start.disabled = salaryAmount.value === '';
+  start.addEventListener('click', appData.start.bind(appData));
+  cancel.addEventListener('click', appData.reset.bind(appData));
+});
 
 document
   .querySelectorAll('input[placeholder = "Наименование"]')
