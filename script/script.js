@@ -22,8 +22,8 @@ const start = document.getElementById('start'),
 let expensesItems = document.querySelectorAll('.expenses-items'),
   incomeItems = document.querySelectorAll('.income-items');
 
-let isNumber = (n) => !isNaN(parseFloat(n)) && isFinite(n);
-let isString = (s) => typeof s === 'string' && s.length !== 0;
+const isNumber = (n) => !isNaN(parseFloat(n)) && isFinite(n);
+const isString = (s) => typeof s === 'string' && s.length !== 0;
 
 class AppData {
   constructor() {
